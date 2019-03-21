@@ -19,11 +19,11 @@ spec:
           image: mongo:3.4.19
           ports:
             - containerPort: 27017
-        - env:
-          - name: MONGODB_PASS
-            value: '1234qwer'
-          - name: MONGODB_USER
-            value: 'root'
+          env:
+            - name: MONGODB_PASS
+              value: '1234qwer'
+            - name: MONGODB_USER
+              value: 'root'
 
   replicas: 1
   selector:
