@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-gb-mongo
+  name: deploy-mongo-gb
   labels:
-    name: deploy-gb-mongo
+    name: deploy-mongo-gb
     type: mongo
 
 spec:
   template:
     metadata:
-      name: gb-mongo
+      name: mongo-gb
       labels:
-        app: gb-mongo
+        app: mongo-gb
         type: mongo
     spec:
       containers:
-        - name: gb-mongo
+        - name: mongo-gb
           image: mongo:3.4.19
           ports:
             - containerPort: 27017
   replicas: 1
   selector:
     matchLabels:
-      app: gb-mongo
+      app: mongo-gb
