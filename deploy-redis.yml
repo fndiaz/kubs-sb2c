@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-api-redis
+  name: deploy-gb-redis
   labels:
-    name: deploy-api-redis
+    name: deploy-gb-redis
     type: redis
 
 spec:
   template:
     metadata:
-      name: api-redis
+      name: gb-redis
       labels:
-        app: api-redis
+        app: gb-redis
         type: redis
     spec:
       containers:
-        - name: redis
+        - name: gb-redis
           image: redis
           ports:
             - containerPort: 6379
   replicas: 1
   selector:
     matchLabels:
-      app: api-redis
+      app: gb-redis

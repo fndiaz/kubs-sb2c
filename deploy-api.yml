@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-api-front
+  name: deploy-api-gb
   labels:
-    name: deploy-api-front
+    name: deploy-api-gb
     type: api
 
 spec:
   template:
     metadata:
-      name: api-front
+      name: api-gb
       labels:
-        app: api-front
+        app: api-gb
         type: api
     spec:
       containers:
-        - name: api-front
+        - name: api-gb
           image:
           ports:
             - containerPort: 80
   replicas: 2
   selector:
     matchLabels:
-      app: api-front
+      app: api-gb
