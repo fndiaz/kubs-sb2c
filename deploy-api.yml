@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-api-front
+  labels:
+    name: deploy-api-front
+    type: api
+
+spec:
+  template:
+    metadata:
+      name: api-front
+      labels:
+        app: api-front
+        type: api
+    spec:
+      containers:
+        - name: api-front
+          image:
+          ports:
+            - containerPort: 80
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-front
