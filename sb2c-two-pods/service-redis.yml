@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-gb
+  labels:
+    name: redis-gb
+
+spec:
+  ports:
+    - targetPort: 6379
+      port: 6379
+  selector:
+    app: redis-gb

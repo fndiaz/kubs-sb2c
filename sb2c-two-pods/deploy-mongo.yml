@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-mongo-gb
+  labels:
+    name: deploy-mongo-gb
+    type: mongo
+
+spec:
+  template:
+    metadata:
+      name: mongo-gb
+      labels:
+        app: mongo-gb
+        type: mongo
+    spec:
+      containers:
+        - name: mongo-gb
+          image: mongo:3.4.19
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGODB_PASS
+              value: '1234qwer'
+            - name: MONGODB_USER
+              value: 'root'
+
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-gb

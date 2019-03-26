@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-api-gb
+  name: deploy-php-gb
   labels:
-    name: deploy-api-gb
-    type: api
+    name: deploy-php-gb
+    type: php
 
 spec:
   template:
     metadata:
-      name: api-gb
+      name: php-gb
       labels:
-        app: api-gb
-        type: api
+        app: php-gb
+        type: php
     spec:
       containers:
-        - name: api-gb
-          image: fndiaz/app-init:v0.02
+        - name: php-gb
+          image: fndiaz/php-custom
           ports:
             - containerPort: 80
   replicas: 2
   selector:
     matchLabels:
-      app: api-gb
+      app: php-gb
