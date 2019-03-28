@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: custom-image
+  labels:
+    name: custom-image

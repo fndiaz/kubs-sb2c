@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deploy-mongo-gb
-  namespace: custom-image
+  namespace: two-containers
   labels:
     name: deploy-mongo-gb
     type: mongo

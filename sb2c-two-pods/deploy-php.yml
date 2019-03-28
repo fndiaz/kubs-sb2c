@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: php-gb
-          image: fndiaz/php-custom
+          image: fndiaz/php-custom:opcache
           ports:
             - containerPort: 80
   replicas: 2

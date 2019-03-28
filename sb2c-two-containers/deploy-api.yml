@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deploy-api-gb
-  namespace: custom-image
+  namespace: two-containers
   labels:
     name: deploy-api-gb
     type: api
@@ -16,8 +16,12 @@ spec:
         type: api
     spec:
       containers:
-        - name: api-gb
-          image: fndiaz/app-init:v0.02
+        - name: php-gb
+          image: fndiaz/php-custom:v1
+          ports:
+            - containerPort: 9000
+        - name: nginx-gb
+          image: fndiaz/nginx-custom:localhost
           ports:
             - containerPort: 80
   replicas: 2
