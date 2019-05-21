@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deploy-nginx-gb
+  namespace: sb2c-homol
   labels:
     name: deploy-nginx-gb
     type: nginx
@@ -16,10 +17,13 @@ spec:
     spec:
       containers:
         - name: nginx-gb
-          image: fndiaz/nginx-custom
+          #image: fndiaz/nginx-custom
+          image: 069138660701.dkr.ecr.us-east-2.amazonaws.com/sb2c-nginx
           ports:
             - containerPort: 80
-  replicas: 2
+      #nodeSelector:
+      #  beta.kubernetes.io/instance-type: m5.xlarge
+  replicas: 6
   selector:
     matchLabels:
       app: nginx-gb

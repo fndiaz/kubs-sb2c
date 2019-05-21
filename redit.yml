@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  labels:
+    app: app
+spec:
+  selector:
+    matchLabels:
+      app: app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: app-data
+          mountPath: "/srv/app"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 120
+          periodSeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 120
+          periodSeconds: 15
+          timeoutSeconds: 5
+      - name: php-fpm
+        image: php:7.2-fpm
+        ports:
+        - containerPort: 9000
+        livenessProbe:
+          tcpSocket:
+            port: 9000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 2
+        volumeMounts:
+        - name: app-data
+          mountPath: "/srv/app"
+      initContainers:
+      - name: setup
+        image: your-init-image:version
+        env:
+        - name: APP_ENV
+          value: prod
+        volumeMounts:
+        - name: app-data
+          mountPath: "/srv/app"
+      volumes:
+        - name: app-data
+          emptyDir: {}

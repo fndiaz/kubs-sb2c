@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-homol-config
+  namespace: sb2c-homol
+data:
+  .env: |
+    AWS_SECRETS_SECRET_NAME=homol/backend
+    REDIS_HOST=redis-gb.sb2c.internal

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deploy-php-gb
+  namespace: sb2c-homol
   labels:
     name: deploy-php-gb
     type: php
@@ -16,10 +17,26 @@ spec:
     spec:
       containers:
         - name: php-gb
-          image: fndiaz/php-custom:opcache
+          #image: fndiaz/php-custom:opcache
+          image: 069138660701.dkr.ecr.us-east-2.amazonaws.com/sb2c-php:php-predis1.1.0
           ports:
-            - containerPort: 80
-  replicas: 2
+            - containerPort: 9000
+          volumeMounts:
+            - name: config-volume
+              mountPath: /var/www/html/.env
+              subPath: .env
+          #resources:
+          #  requests:
+          #    cpu: 150m
+          #  limits:
+          #    cpu: 901m
+      #nodeSelector:
+      #  "beta.kubernetes.io/instance-type": m5.xlarge
+      volumes:
+        - name: config-volume
+          configMap:
+            name: env-homol-local
+  replicas: 6
   selector:
     matchLabels:
       app: php-gb

@@ -2,14 +2,20 @@ apiVersion: v1
 kind: Service
 metadata:
   name: service-nginx-gb
+  namespace: sb2c-homol
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:iam::069138660701:server-certificate/sb2c-2019
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443,80"
   labels:
     name: service-nginx-gb
 
 spec:
   type: LoadBalancer
+  externalName: teste
   ports:
     - targetPort: 80
-      port: 80
-      nodePort: 30002
+      port: 443
+      #nodePort: 30002
   selector:
     app: nginx-gb

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: php-gb
+  namespace: sb2c-homol
   labels:
     name: php-gb
 

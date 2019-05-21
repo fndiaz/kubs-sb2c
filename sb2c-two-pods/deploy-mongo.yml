@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deploy-mongo-gb
+  namespace: sb2c-homol
   labels:
     name: deploy-mongo-gb
     type: mongo

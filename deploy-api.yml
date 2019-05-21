@@ -17,10 +17,11 @@ spec:
     spec:
       containers:
         - name: api-gb
-          image: fndiaz/app-init:v0.02
+          #image: fndiaz/app-init:v0.02
+          image: 069138660701.dkr.ecr.us-east-2.amazonaws.com/custom-image:redis
           ports:
             - containerPort: 80
-  replicas: 2
+  replicas: 20
   selector:
     matchLabels:
       app: api-gb

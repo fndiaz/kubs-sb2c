@@ -1,6 +1,6 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: two-containers
+  name: sb2c-homol
   labels:
-    name: two-containers
+    name: sb2c-homol

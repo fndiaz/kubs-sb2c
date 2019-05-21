@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-php-worker
+  namespace: sb2c-homol
+  labels:
+    name: deploy-php-worker
+    type: php
+
+spec:
+  template:
+    metadata:
+      name: php-worker
+      labels:
+        app: php-worker
+        type: php
+    spec:
+      containers:
+        - name: php-worker
+          #image: fndiaz/php-custom:opcache
+          image: 069138660701.dkr.ecr.us-east-2.amazonaws.com/sb2c:6e6214ce7d77b861d0ce14ffdb52f53df5a6b5e3
+          command: ["bash", "-c", "php artisan queue:work --tries 3"]
+          #args: ["bash", "-c", "artisan queue:work"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /var/www/html/.env
+              subPath: .env
+      nodeSelector:
+        beta.kubernetes.io/instance-type: m5.xlarge
+      volumes:
+        - name: config-volume
+          configMap:
+            name: env-homol-config
+  replicas: 2
+  selector:
+    matchLabels:
+      app: php-worker

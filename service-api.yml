@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: service-api-gb
   namespace: custom-image
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:iam::069138660701:server-certificate/sb2c-2019
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443,80"
   labels:
     name: service-api-gb
 
@@ -10,7 +14,7 @@ spec:
   type: LoadBalancer
   ports:
     - targetPort: 80
-      port: 80
-      nodePort: 30004
+      port: 443
+      #nodePort: 30004
   selector:
     app: api-gb
